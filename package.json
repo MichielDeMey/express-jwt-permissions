@@ -4,7 +4,8 @@
   "description": "Express middleware for JWT permissions",
   "main": "./lib/index.js",
   "scripts": {
-    "test": "node ./test"
+    "test": "istanbul cover ./test --report lcovonly",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,8 @@
   "author": "Michiel De Mey <de.mey.michiel@gmail.com> (http://demey.io)",
   "license": "MIT",
   "devDependencies": {
+    "coveralls": "^2.11.6",
+    "istanbul": "^0.4.1",
     "tape": "^4.2.2"
   },
   "dependencies": {
