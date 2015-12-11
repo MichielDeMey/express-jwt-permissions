@@ -1,0 +1,32 @@
+{
+  "name": "express-jwt-permissions",
+  "version": "0.1.0",
+  "description": "Express middleware for JWT permissions",
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "node ./test"
+  },
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/MichielDeMey/express-jwt-permissions.git"
+  },
+  "bugs": "https://github.com/MichielDeMey/express-jwt-permissions/issues",
+  "keywords": [
+    "express",
+    "middleware",
+    "JWT",
+    "permissions",
+    "authorization",
+    "token",
+    "security"
+  ],
+  "author": "Michiel De Mey <de.mey.michiel@gmail.com> (http://demey.io)",
+  "license": "MIT",
+  "devDependencies": {
+    "tape": "^4.2.2"
+  },
+  "dependencies": {
+    "lodash.get": "^3.7.0",
+    "lodash.isequal": "^3.0.4"
+  }
+}
