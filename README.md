@@ -1,5 +1,7 @@
 # Express JWT Permissions
 
+[![Build Status](https://travis-ci.org/MichielDeMey/express-jwt-permissions.svg?branch=master)](https://travis-ci.org/MichielDeMey/express-jwt-permissions)
+
 Middleware that checks JWT tokens for permissions, recommended to be used in conjunction with [express-jwt](https://github.com/auth0/express-jwt).
 
 ## Install
