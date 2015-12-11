@@ -6,9 +6,9 @@
   "scripts": {
     "test": "node ./test"
   },
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/MichielDeMey/express-jwt-permissions.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MichielDeMey/express-jwt-permissions.git"
   },
   "bugs": "https://github.com/MichielDeMey/express-jwt-permissions/issues",
   "keywords": [
@@ -28,5 +28,8 @@
   "dependencies": {
     "lodash.get": "^3.7.0",
     "lodash.isequal": "^3.0.4"
+  },
+  "engines": {
+    "node": ">=0.10"
   }
 }
