@@ -55,7 +55,7 @@ Example:
 Consider you've set your permissions as `scopes` on `req.identity`, your JWT structure looks like:
 
 ```json
-"scopes": ['user:read', 'user:write']
+"scopes": ["user:read", "user:write"]
 ```
 
 You can pass the configuration as the last argument:
@@ -63,7 +63,7 @@ You can pass the configuration as the last argument:
 ```javascript
 var guard = require('express-jwt-permissions')({
 	userProperty: 'identity',
-	permissionsProperty: 'actions'
+	permissionsProperty: 'scopes'
 })
 
 app.use(guard.check('user:read'))

@@ -1,17 +1,17 @@
 var test = require('tape')
 var guard = require('../index')()
 
-test('valid permissons [Array] notation', function (t) {
+test('valid permissions [Array] notation', function (t) {
   var req = { user: { permissions: ['ping'] } }
   guard.check(['ping'])(req, {}, t.end)
 })
 
-test('valid permissons [String] notation', function (t) {
+test('valid permissions [String] notation', function (t) {
   var req = { user: { permissions: ['ping'] } }
   guard.check('ping')(req, {}, t.end)
 })
 
-test('invalid permissons [Object] notation', function (t) {
+test('invalid permissions [Object] notation', function (t) {
   var req = { user: { permissions: { 'ping': true } } }
   guard.check('ping')(req, {}, function (err) {
     if (!err) return t.end('should throw an error')
@@ -29,7 +29,7 @@ test('permissions array not found', function (t) {
   })
 })
 
-test('valid permissons with custom options', function (t) {
+test('valid permissions with custom options', function (t) {
   var guard = require('../index')({
     requestProperty: 'identity',
     permissionsProperty: 'scopes'
@@ -38,7 +38,7 @@ test('valid permissons with custom options', function (t) {
   guard.check('ping')(req, {}, t.end)
 })
 
-test('invalid permissons [Array] notation', function (t) {
+test('invalid permissions [Array] notation', function (t) {
   var req = { user: { permissions: ['ping'] } }
   guard.check('foo')(req, {}, function (err) {
     if (!err) return t.end('should throw an error')
