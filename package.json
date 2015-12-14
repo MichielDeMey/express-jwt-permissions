@@ -2,10 +2,12 @@
   "name": "express-jwt-permissions",
   "version": "0.1.0",
   "description": "Express middleware for JWT permissions",
-  "main": "./lib/index.js",
+  "main": "./index.js",
   "scripts": {
-    "test": "istanbul cover ./test --report lcovonly",
-    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
+    "test": "npm run cover",
+    "test:node": "tape test/*.js",
+    "cover": "istanbul cover ./test/*.js --report lcovonly",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls && rm -rf coverage"
   },
   "repository": {
     "type": "git",
@@ -22,6 +24,10 @@
     "security"
   ],
   "author": "Michiel De Mey <de.mey.michiel@gmail.com> (http://demey.io)",
+  "contributors": [{
+    "name": "Gilles De Mey",
+    "email": "gilles.de.mey@gmail.com"
+  }],
   "license": "MIT",
   "devDependencies": {
     "coveralls": "^2.11.6",
@@ -29,8 +35,10 @@
     "tape": "^4.2.2"
   },
   "dependencies": {
+    "lodash.every": "^3.2.3",
     "lodash.get": "^3.7.0",
-    "lodash.isequal": "^3.0.4"
+    "lodash.includes": "^3.1.3",
+    "xtend": "^4.0.1"
   },
   "engines": {
     "node": ">=0.10"
