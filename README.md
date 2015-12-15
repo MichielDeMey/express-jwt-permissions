@@ -7,7 +7,9 @@ Middleware that checks JWT tokens for permissions, recommended to be used in con
 
 ## Install
 
-  npm install express-jwt-permissions --save
+```
+npm install express-jwt-permissions --save
+```
 
 ## Usage
 
