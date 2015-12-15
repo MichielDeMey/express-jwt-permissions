@@ -15,97 +15,58 @@ This middleware assumes you already have a JWT authentication middleware such as
 
 The middleware will check a decoded JWT token to see if a token has permissions to make a certain request.
 
-Permissions can be described as an array of strings,
+Permissions should be described as an array of strings inside the JWT token.
 
 ```json
 "permissions": [
 	"status",
-	"user_read",
-	"user_write"
+	"user:read",
+	"user:write"
 ]
 ```
 
-or as an object.
+If your JWT structure looks different you should map or reduce the results to produce a simple Array of permissions.
 
-```json
-"permissions": {
-	"status": true,
-	"user": {
-		"read": true,
-		"create": true
-	}
-}
-```
-
-
-### Using permission arrays
+### Using permission Array
 To verify a permission for all routes using an array:
 
 ```javascript
-var jwt_permissons = require('express-jwt-permissions')
+var guard = require('express-jwt-permissions')
 
-app.use(jwt_permissions('status'))
+app.use(guard.check('admin'))
 ```
 
 If you require different permissions per route, you can set the middleware per route.
 
 ```javascript
-var jwt_permissons = require('express-jwt-permissions')
+var guard = require('express-jwt-permissions')
 
-var permission_status    = jwt_permissions('status')
-var permission_user_read = jwt_permissions('user_read', true)
-
-app.get('/status', permission_status, function(req, res) { ... })
-app.get('/user', permission_user_read, function(req, res) { ... })
+app.get('/status', guard.check('status'), function(req, res) { ... })
+app.get('/user', guard.check(['user:read']), function(req, res) { ... })
 ```
 
-### Using permission hashmaps
-
-To verify a permission for all routes using a hashmap:
-
-```javascript
-var jwt_permissons = require('express-jwt-permissions')
-
-app.use(jwt_permissions('status', true))
-```
-
----
-
-You can verify nested properties of permissions as well using the dot notation:
-
-```javascript
-var jwt_permissons = require('express-jwt-permissions')
-
-app.use(jwt_permissions('user.read', true))
-```
-
-### Advanced Configuration
+### Configuration
 To set where the module can find the user property (default `req.user`) you can set the `userProperty` option.
 
 To set where the module can find the permissions property inside the `userProperty` object (default `permissions`), set the `permissionsProperty` option.
 
 Example:
 
-Consider you've set your permissions as `actions` on `req.identity`:
+Consider you've set your permissions as `scopes` on `req.identity`, your JWT structure looks like:
 
 ```json
-"actions": {
-	"user": {
-		"read": true,
-		"write": true
-	}
-}
+"scopes": ["user:read", "user:write"]
 ```
 
 You can pass the configuration as the last argument:
 
 ```javascript
-var jwt_permissons = require('express-jwt-permissions')
-
-app.use(jwt_permissions('user.read', true, {
+var guard = require('express-jwt-permissions')({
 	userProperty: 'identity',
-	permissionsProperty: 'actions'
-}))
+	permissionsProperty: 'scopes'
+})
+
+app.use(guard.check('user:read'))
 ```
 
 ## Tests
