@@ -7,7 +7,7 @@ Middleware that checks JWT tokens for permissions, recommended to be used in con
 
 ## Install
 
-	npm install express-jwt-permissions --save
+  npm install express-jwt-permissions --save
 
 ## Usage
 
@@ -19,9 +19,9 @@ Permissions should be described as an array of strings inside the JWT token.
 
 ```json
 "permissions": [
-	"status",
-	"user:read",
-	"user:write"
+  "status",
+  "user:read",
+  "user:write"
 ]
 ```
 
@@ -46,9 +46,9 @@ app.get('/user', guard.check(['user:read']), function(req, res) { ... })
 ```
 
 ### Configuration
-To set where the module can find the user property (default `req.user`) you can set the `userProperty` option.
+To set where the module can find the user property (default `req.user`) you can set the `requestProperty` option.
 
-To set where the module can find the permissions property inside the `userProperty` object (default `permissions`), set the `permissionsProperty` option.
+To set where the module can find the permissions property inside the `requestProperty` object (default `permissions`), set the `permissionsProperty` option.
 
 Example:
 
@@ -62,8 +62,8 @@ You can pass the configuration as the last argument:
 
 ```javascript
 var guard = require('express-jwt-permissions')({
-	userProperty: 'identity',
-	permissionsProperty: 'scopes'
+  requestProperty: 'identity',
+  permissionsProperty: 'scopes'
 })
 
 app.use(guard.check('user:read'))
