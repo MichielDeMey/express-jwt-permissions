@@ -6,6 +6,11 @@ test('valid permissions [Array] notation', function (t) {
   guard.check(['ping'])(req, {}, t.end)
 })
 
+test('valid multiple permissions', function (t) {
+  var req = { user: { permissions: ['foo', 'bar'] } }
+  guard.check(['foo', 'bar'])(req, {}, t.end)
+})
+
 test('valid permissions [String] notation', function (t) {
   var req = { user: { permissions: ['ping'] } }
   guard.check('ping')(req, {}, t.end)
