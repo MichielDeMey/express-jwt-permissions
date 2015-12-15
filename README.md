@@ -31,7 +31,7 @@ If your JWT structure looks different you should map or reduce the results to pr
 To verify a permission for all routes using an array:
 
 ```javascript
-var guard = require('express-jwt-permissions')
+var guard = require('express-jwt-permissions')()
 
 app.use(guard.check('admin'))
 ```
@@ -39,7 +39,7 @@ app.use(guard.check('admin'))
 If you require different permissions per route, you can set the middleware per route.
 
 ```javascript
-var guard = require('express-jwt-permissions')
+var guard = require('express-jwt-permissions')()
 
 app.get('/status', guard.check('status'), function(req, res) { ... })
 app.get('/user', guard.check(['user:read']), function(req, res) { ... })
@@ -58,7 +58,7 @@ Consider you've set your permissions as `scopes` on `req.identity`, your JWT str
 "scopes": ["user:read", "user:write"]
 ```
 
-You can pass the configuration as the last argument:
+You can pass the configuration into the module:
 
 ```javascript
 var guard = require('express-jwt-permissions')({
