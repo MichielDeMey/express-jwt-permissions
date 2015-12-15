@@ -27,6 +27,9 @@ Guard.prototype = {
       var self = this
       var options = self._options
 
+      var user = req[options.requestProperty]
+      if (!user) return next()
+
       var permissions = _get(req, [options.requestProperty, options.permissionsProperty])
 
       if (!permissions) {

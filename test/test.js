@@ -3,6 +3,11 @@ var guard = require('../index')()
 
 var res = {}
 
+test('no user object present, should pass', function (t) {
+  var req = {}
+  guard.check(['ping'])(req, res, t.end)
+})
+
 test('valid permissions [Array] notation', function (t) {
   var req = { user: { permissions: ['ping'] } }
   guard.check(['ping'])(req, res, t.end)
