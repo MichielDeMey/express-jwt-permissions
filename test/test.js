@@ -47,7 +47,17 @@ test('valid permissions with custom options', function (t) {
 
 test('invalid permissions [Array] notation', function (t) {
   var req = { user: { permissions: ['ping'] } }
-  guard.check('foo')(req, {}, function (err) {
+  guard.check('foo')(req, res, function (err) {
+    if (!err) return t.end('should throw an error')
+
+    t.ok(err.code === 'permission_denied', 'correct error code')
+    t.end()
+  })
+})
+
+test('invalid required multiple permissions', function (t) {
+  var req = { user: { permissions: ['foo'] } }
+  guard.check(['foo', 'bar'])(req, res, function (err) {
     if (!err) return t.end('should throw an error')
 
     t.ok(err.code === 'permission_denied', 'correct error code')
