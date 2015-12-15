@@ -1,24 +1,26 @@
 var test = require('tape')
 var guard = require('../index')()
 
+var res = {}
+
 test('valid permissions [Array] notation', function (t) {
   var req = { user: { permissions: ['ping'] } }
-  guard.check(['ping'])(req, {}, t.end)
+  guard.check(['ping'])(req, res, t.end)
 })
 
 test('valid multiple permissions', function (t) {
   var req = { user: { permissions: ['foo', 'bar'] } }
-  guard.check(['foo', 'bar'])(req, {}, t.end)
+  guard.check(['foo', 'bar'])(req, res, t.end)
 })
 
 test('valid permissions [String] notation', function (t) {
   var req = { user: { permissions: ['ping'] } }
-  guard.check('ping')(req, {}, t.end)
+  guard.check('ping')(req, res, t.end)
 })
 
 test('invalid permissions [Object] notation', function (t) {
   var req = { user: { permissions: { 'ping': true } } }
-  guard.check('ping')(req, {}, function (err) {
+  guard.check('ping')(req, res, function (err) {
     if (!err) return t.end('should throw an error')
     t.ok(err.code === 'permissions_invalid', 'correct error code')
     t.end()
@@ -27,7 +29,7 @@ test('invalid permissions [Object] notation', function (t) {
 
 test('permissions array not found', function (t) {
   var req = { user: {} }
-  guard.check('ping')(req, {}, function (err) {
+  guard.check('ping')(req, res, function (err) {
     if (!err) return t.end('should throw an error')
     t.ok(err.code === 'permissions_not_found', 'correct error code')
     t.end()
@@ -40,7 +42,7 @@ test('valid permissions with custom options', function (t) {
     permissionsProperty: 'scopes'
   })
   var req = { identity: { scopes: ['ping'] } }
-  guard.check('ping')(req, {}, t.end)
+  guard.check('ping')(req, res, t.end)
 })
 
 test('invalid permissions [Array] notation', function (t) {
