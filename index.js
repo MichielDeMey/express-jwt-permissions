@@ -1,6 +1,3 @@
-var _every = require('lodash.every')
-var _get = require('lodash.get')
-var _includes = require('lodash.includes')
 var xtend = require('xtend')
 
 var UnauthorizedError = require('./error')
@@ -30,7 +27,7 @@ Guard.prototype = {
       var user = req[options.requestProperty]
       if (!user) return next()
 
-      var permissions = _get(req, [options.requestProperty, options.permissionsProperty])
+      var permissions = user[options.permissionsProperty]
 
       if (!permissions) {
         return next(new UnauthorizedError('permissions_not_found', {
@@ -44,8 +41,8 @@ Guard.prototype = {
         }))
       }
 
-      var sufficient = _every(required, function (permission) {
-        return _includes(permissions, permission)
+      var sufficient = required.every(function (permission) {
+        return permissions.indexOf(permission) !== -1
       })
 
       return next(!sufficient ? PermissionError : null)
