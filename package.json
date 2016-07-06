@@ -4,10 +4,8 @@
   "description": "Express middleware for JWT permissions",
   "main": "./index.js",
   "scripts": {
-    "test": "npm run cover",
-    "test:node": "tape test/*.js",
-    "cover": "istanbul cover ./test/*.js --report lcovonly",
-    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls && rm -rf coverage"
+    "lint": "standard",
+    "test": "npm run lint && tap test/*.js --coverage-report=text-summary"
   },
   "repository": {
     "type": "git",
@@ -32,9 +30,8 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "coveralls": "^2.11.6",
-    "istanbul": "^0.4.1",
-    "tape": "^4.2.2"
+    "standard": "^7.1.2",
+    "tap": "^6.1.1"
   },
   "dependencies": {
     "xtend": "^4.0.1"

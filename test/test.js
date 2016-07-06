@@ -1,4 +1,5 @@
-var test = require('tape')
+var tap = require('tap')
+var test = tap.test
 var guard = require('../index')()
 
 var res = {}
