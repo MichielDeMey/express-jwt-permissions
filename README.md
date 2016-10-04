@@ -74,6 +74,18 @@ var guard = require('express-jwt-permissions')({
 app.use(guard.check('user:read'))
 ```
 
+## Error handling
+
+The default behavior is to throw an error when the token is invalid, so you can add your custom logic to manage unauthorized access as follows:
+
+```javascript
+app.use(function (err, req, res) {
+  if (err.code === 'permission_denied') {
+    res.status(401).send('insufficient permissions');
+  }
+});
+```
+
 ## Tests
 
     $ npm install
