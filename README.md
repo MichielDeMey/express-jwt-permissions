@@ -81,7 +81,7 @@ The default behavior is to throw an error when the token is invalid, so you can 
 ```javascript
 app.use(guard.check('admin'))
 
-app.use(function (err, req, res) {
+app.use(function (err, req, res, next) {
   if (err.code === 'permission_denied') {
     res.status(401).send('insufficient permissions');
   }
