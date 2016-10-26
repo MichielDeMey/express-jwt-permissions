@@ -24,6 +24,12 @@ Guard.prototype = {
       var self = this
       var options = self._options
 
+      if (!options.requestProperty) {
+        return next(new UnauthorizedError('request_property_undefined', {
+          message: 'requestProperty hasn\'t been defined. Check your configuration.'
+        }))
+      }
+
       var user = req[options.requestProperty]
       if (!user) return next()
 

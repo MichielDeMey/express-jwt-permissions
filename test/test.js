@@ -42,6 +42,20 @@ test('permissions array not found', function (t) {
   })
 })
 
+test('invalid requestProperty with custom options', function (t) {
+  var guard = require('../index')({
+    requestProperty: undefined,
+    permissionsProperty: 'scopes'
+  })
+  var req = { identity: { scopes: ['ping'] } }
+  guard.check('ping')(req, res, function (err) {
+    if (!err) return t.end('should throw an error')
+
+    t.ok(err.code === 'request_property_undefined', 'correct error code')
+    t.end()
+  })
+})
+
 test('valid permissions with custom options', function (t) {
   var guard = require('../index')({
     requestProperty: 'identity',
