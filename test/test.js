@@ -106,3 +106,37 @@ test('invalid required multiple permissions', function (t) {
     t.end()
   })
 })
+
+test('valid permissions with deep permissionsProperty', function (t) {
+  t.plan(1)
+  var guard = require('../index')({
+    requestProperty: 'identity',
+    permissionsProperty: 'scopes.permissions'
+  })
+  var req = { identity: { scopes: { permissions: ['ping'] } } }
+  guard.check('ping')(req, res, t.error)
+})
+
+test('invalid permissions with deep permissionsProperty', function (t) {
+  var guard = require('../index')({
+    requestProperty: 'identity',
+    permissionsProperty: 'scopes.permissions'
+  })
+  var req = { identity: { scopes: { permissions: ['ping'] } } }
+  guard.check('foo')(req, res, function (err) {
+    if (!err) return t.end('should throw an error')
+
+    t.ok(err.code === 'permission_denied', 'correct error code')
+    t.end()
+  })
+})
+
+test('valid permissions with very deep permissionsProperty', function (t) {
+  t.plan(1)
+  var guard = require('../index')({
+    requestProperty: 'identity',
+    permissionsProperty: 'scopes.permissions.this.is.deep'
+  })
+  var req = { identity: { scopes: { permissions: { this: { is: { deep: ['ping'] } } } } } }
+  guard.check('ping')(req, res, t.error)
+})

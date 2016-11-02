@@ -1,5 +1,6 @@
 var util = require('util')
 var xtend = require('xtend')
+var get = require('lodash.get')
 
 var UnauthorizedError = require('./error')
 var PermissionError = new UnauthorizedError(
@@ -11,6 +12,7 @@ var Guard = function (options) {
     requestProperty: 'user',
     permissionsProperty: 'permissions'
   }
+
   this._options = xtend(defaults, options)
 }
 
@@ -38,8 +40,7 @@ Guard.prototype = {
         }))
       }
 
-      var permissions = user[options.permissionsProperty]
-
+      var permissions = get(user, options.permissionsProperty, undefined)
       if (!permissions) {
         return next(new UnauthorizedError('permissions_not_found', {
           message: 'Could not find permissions for user. Bad configuration?'
