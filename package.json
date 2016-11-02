@@ -34,7 +34,7 @@
     "tap": "^8.0.0"
   },
   "dependencies": {
-    "lodash": "^4.16.6",
+    "lodash.get": "^4.4.2",
     "xtend": "^4.0.1"
   },
   "engines": {

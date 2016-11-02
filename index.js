@@ -1,6 +1,6 @@
 var util = require('util')
 var xtend = require('xtend')
-var get = require('lodash/get')
+var get = require('lodash.get')
 
 var UnauthorizedError = require('./error')
 var PermissionError = new UnauthorizedError(
