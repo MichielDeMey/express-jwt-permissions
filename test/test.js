@@ -4,24 +4,45 @@ var guard = require('../index')()
 
 var res = {}
 
-test('no user object present, should pass', function (t) {
+test('no user object present, should throw', function (t) {
   var req = {}
-  guard.check(['ping'])(req, res, t.end)
+  guard.check(['ping'])(req, res, function (err) {
+    if (!err) return t.end('should throw an error')
+    t.ok(err.code === 'user_object_not_found', 'correct error code')
+    t.end()
+  })
+})
+
+test('incorrect user object present, should throw', function (t) {
+  t.plan(1)
+  var guard = require('../index')({
+    requestProperty: 'identity',
+    permissionsProperty: 'bar'
+  })
+  var req = { user: { scopes: ['foobar'] } }
+  guard.check('ping')(req, res, function (err) {
+    if (!err) return t.end('should throw an error')
+    t.ok(err.code === 'user_object_not_found', 'correct error code')
+    t.end()
+  })
 })
 
 test('valid permissions [Array] notation', function (t) {
+  t.plan(1)
   var req = { user: { permissions: ['ping'] } }
-  guard.check(['ping'])(req, res, t.end)
+  guard.check(['ping'])(req, res, t.error)
 })
 
 test('valid multiple permissions', function (t) {
+  t.plan(1)
   var req = { user: { permissions: ['foo', 'bar'] } }
-  guard.check(['foo', 'bar'])(req, res, t.end)
+  guard.check(['foo', 'bar'])(req, res, t.error)
 })
 
 test('valid permissions [String] notation', function (t) {
+  t.plan(1)
   var req = { user: { permissions: ['ping'] } }
-  guard.check('ping')(req, res, t.end)
+  guard.check('ping')(req, res, t.error)
 })
 
 test('invalid permissions [Object] notation', function (t) {
@@ -57,12 +78,13 @@ test('invalid requestProperty with custom options', function (t) {
 })
 
 test('valid permissions with custom options', function (t) {
+  t.plan(1)
   var guard = require('../index')({
     requestProperty: 'identity',
     permissionsProperty: 'scopes'
   })
   var req = { identity: { scopes: ['ping'] } }
-  guard.check('ping')(req, res, t.end)
+  guard.check('ping')(req, res, t.error)
 })
 
 test('invalid permissions [Array] notation', function (t) {
