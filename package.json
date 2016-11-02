@@ -5,7 +5,7 @@
   "main": "./index.js",
   "scripts": {
     "lint": "standard",
-    "test": "npm run lint && tap test/*.js --coverage-report=text-summary"
+    "test": "npm run lint && tap test/*.js --coverage"
   },
   "repository": {
     "type": "git",
