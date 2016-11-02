@@ -1,3 +1,4 @@
+var util = require('util')
 var xtend = require('xtend')
 
 var UnauthorizedError = require('./error')
@@ -31,7 +32,11 @@ Guard.prototype = {
       }
 
       var user = req[options.requestProperty]
-      if (!user) return next()
+      if (!user) {
+        return next(new UnauthorizedError('user_object_not_found', {
+          message: util.format('user object "%s" was not found. Check your configuration.', options.requestProperty)
+        }))
+      }
 
       var permissions = user[options.permissionsProperty]
 

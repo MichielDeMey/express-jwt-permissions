@@ -31,7 +31,7 @@
   "license": "MIT",
   "devDependencies": {
     "standard": "^7.1.2",
-    "tap": "^6.1.1"
+    "tap": "^8.0.0"
   },
   "dependencies": {
     "xtend": "^4.0.1"
