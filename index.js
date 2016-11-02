@@ -9,8 +9,13 @@ var PermissionError = new UnauthorizedError(
 var Guard = function (options) {
   var defaults = {
     requestProperty: 'user',
-    permissionsProperty: 'permissions'
+    permissionsProperty: ['permissions']
   }
+
+  if (options != null) {
+    options.permissionsProperty = options.permissionsProperty.split('.')
+  }
+
   this._options = xtend(defaults, options)
 }
 
@@ -38,7 +43,16 @@ Guard.prototype = {
         }))
       }
 
-      var permissions = user[options.permissionsProperty]
+      var permissions = user
+      options.permissionsProperty.forEach(function (key) {
+        try {
+          permissions = permissions[key]
+        } catch (e) {
+          return next(new UnauthorizedError('property_invalid', {
+            message: 'property isn\'t defined. Check your configuration.'
+          }))
+        }
+      })
 
       if (!permissions) {
         return next(new UnauthorizedError('permissions_not_found', {
