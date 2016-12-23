@@ -75,7 +75,7 @@ app.use(guard.check('user:read'))
 ```
 
 ### Ignored URLs
-You can pass as a second argument the url(s) that check will ignore
+You can pass a second argument of url(s) ot ignore
 ```javascript
 app.use(guard.check('admin', '/token'))
 
