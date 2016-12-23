@@ -18,14 +18,19 @@ var Guard = function (options) {
 
 Guard.prototype = {
 
-  check: function (required) {
+  check: function (required, excludedUrls) {
     if (typeof required === 'string') required = [required]
+    if (typeof excludedUrls === 'string') excludedUrls = [excludedUrls]
 
     return _middleware.bind(this)
 
     function _middleware (req, res, next) {
       var self = this
       var options = self._options
+
+      if (excludedUrls.indexOf(req.url) !== -1) {
+        return next(null)
+      }
 
       if (!options.requestProperty) {
         return next(new UnauthorizedError('request_property_undefined', {
