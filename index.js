@@ -18,7 +18,7 @@ var Guard = function (options) {
 
 Guard.prototype = {
 
-  check: function (required, excludedUrls='') {
+  check: function (required, excludedUrls = '') {
     if (typeof required === 'string') required = [required]
     if (typeof excludedUrls === 'string') excludedUrls = [excludedUrls]
 
