@@ -74,6 +74,14 @@ var guard = require('express-jwt-permissions')({
 app.use(guard.check('user:read'))
 ```
 
+### Ignored URLs
+You can pass a second argument of url(s) ot ignore
+```javascript
+app.use(guard.check('admin', '/token'))
+
+app.use(guard.check('admin', ['/token', '/singup'])) //it can be an array too
+```
+
 ## Error handling
 
 The default behavior is to throw an error when the token is invalid, so you can add your custom logic to manage unauthorized access as follows:
