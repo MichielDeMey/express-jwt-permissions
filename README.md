@@ -20,7 +20,7 @@ This middleware assumes you already have a JWT authentication middleware such as
 
 The middleware will check a decoded JWT token to see if a token has permissions to make a certain request.
 
-Permissions should be described as an array of strings inside the JWT token.
+Permissions should be described as an array of strings inside the JWT token, or as a space-delimited [OAuth 2.0 Access Token Scope](https://tools.ietf.org/html/rfc6749#section-3.3) string.
 
 ```json
 "permissions": [
@@ -30,7 +30,11 @@ Permissions should be described as an array of strings inside the JWT token.
 ]
 ```
 
-If your JWT structure looks different you should map or reduce the results to produce a simple Array of permissions.
+```json
+"scope": "status user:read user:write"
+```
+
+If your JWT structure looks different you should map or reduce the results to produce a simple Array or String of permissions.
 
 ### Using permission Array
 To verify a permission for all routes using an array:
@@ -57,10 +61,10 @@ To set where the module can find the permissions property inside the `requestPro
 
 Example:
 
-Consider you've set your permissions as `scopes` on `req.identity`, your JWT structure looks like:
+Consider you've set your permissions as `scope` on `req.identity`, your JWT structure looks like:
 
 ```json
-"scopes": ["user:read", "user:write"]
+"scope": "user:read user:write"
 ```
 
 You can pass the configuration into the module:
@@ -68,7 +72,7 @@ You can pass the configuration into the module:
 ```javascript
 var guard = require('express-jwt-permissions')({
   requestProperty: 'identity',
-  permissionsProperty: 'scopes'
+  permissionsProperty: 'scope'
 })
 
 app.use(guard.check('user:read'))

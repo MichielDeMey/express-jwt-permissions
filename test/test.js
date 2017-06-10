@@ -140,3 +140,9 @@ test('valid permissions with very deep permissionsProperty', function (t) {
   var req = { identity: { scopes: { permissions: { this: { is: { deep: ['ping'] } } } } } }
   guard.check('ping')(req, res, t.error)
 })
+
+test('OAuth space-delimited scopes', function (t) {
+  t.plan(1)
+  var req = { user: { permissions: 'ping foo bar' } }
+  guard.check('foo')(req, res, t.error)
+})
