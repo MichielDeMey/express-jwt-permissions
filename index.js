@@ -47,9 +47,13 @@ Guard.prototype = {
         }))
       }
 
+      if (typeof permissions === 'string') {
+        permissions = permissions.split(' ')
+      }
+
       if (!Array.isArray(permissions)) {
         return next(new UnauthorizedError('permissions_invalid', {
-          message: 'Permissions should be an Array. Bad format?'
+          message: 'Permissions should be an Array or String. Bad format?'
         }))
       }
 
