@@ -39,6 +39,18 @@ test('valid multiple permissions', function (t) {
   guard.check(['foo', 'bar'])(req, res, t.error)
 })
 
+test('valid some matching permissions', function (t) {
+  t.plan(1)
+  var req = { user: { permissions: ['foo:far', 'foo:bar'] } }
+  guard.check(['foo:car,bar'])(req, res, t.error)
+})
+
+test('valid some matching permissions', function (t) {
+  t.plan(1)
+  var req = { user: { permissions: ['foo:far,car', 'too:bar'] } }
+  guard.check(['foo:car'])(req, res, t.error)
+})
+
 test('valid permissions [String] notation', function (t) {
   t.plan(1)
   var req = { user: { permissions: ['ping'] } }
@@ -89,6 +101,16 @@ test('valid permissions with custom options', function (t) {
 
 test('invalid permissions [Array] notation', function (t) {
   var req = { user: { permissions: ['ping'] } }
+  guard.check('foo')(req, res, function (err) {
+    if (!err) return t.end('should throw an error')
+
+    t.ok(err.code === 'permission_denied', 'correct error code')
+    t.end()
+  })
+})
+
+test('invalid permissions [Array] notation unmatching segments', function (t) {
+  var req = { user: { permissions: ['foo:bar'] } }
   guard.check('foo')(req, res, function (err) {
     if (!err) return t.end('should throw an error')
 

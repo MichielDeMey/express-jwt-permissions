@@ -57,8 +57,21 @@ Guard.prototype = {
         }))
       }
 
-      var sufficient = required.every(function (permission) {
-        return permissions.indexOf(permission) !== -1
+      var sufficient = required.every(function (required) {
+        required = required.split(':')
+        return permissions.some(function (permission) {
+          permission = permission.split(':')
+          if (required.length !== permission.length) {
+            return false
+          }
+
+          return required.every(function (required, i) {
+            var perm = permission[i].split(',')
+            return required.split(',').some(function (required) {
+              return perm.indexOf(required) !== -1
+            })
+          })
+        })
       })
 
       return next(!sufficient ? PermissionError : null)
