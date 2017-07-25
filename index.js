@@ -18,7 +18,7 @@ var Guard = function (options) {
 
 Guard.prototype = {
 
-  check: function (required) {
+  check: function (required, superPermission = null) {
     if (typeof required === 'string') required = [required]
 
     return _middleware.bind(this)
@@ -55,6 +55,9 @@ Guard.prototype = {
         return next(new UnauthorizedError('permissions_invalid', {
           message: 'Permissions should be an Array or String. Bad format?'
         }))
+      }
+      if (permissions.indexOf(superPermission) !== -1) {
+        return next(false)
       }
 
       var sufficient = required.every(function (permission) {

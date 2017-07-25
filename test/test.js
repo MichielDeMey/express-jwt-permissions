@@ -146,3 +146,9 @@ test('OAuth space-delimited scopes', function (t) {
   var req = { user: { permissions: 'ping foo bar' } }
   guard.check('foo')(req, res, t.error)
 })
+
+test('super permissions', function (t) {
+  t.plan(1)
+  var req = { user: { permissions: ['admin'] } }
+  guard.check('ping', 'admin')(req, res, t.error)
+})
