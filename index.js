@@ -18,7 +18,7 @@ var Guard = function (options) {
 
 Guard.prototype = {
 
-  check: function (required, superPermission = null) {
+  check: function (required, superPermission) {
     if (typeof required === 'string') required = [required]
 
     return _middleware.bind(this)
