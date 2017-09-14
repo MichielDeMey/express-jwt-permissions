@@ -20,10 +20,11 @@ Guard.prototype = {
 
   check: function (required, superPermission) {
     if (typeof required === 'string') required = [required]
+    if (typeof superPermission === 'string') superPermission = [superPermission];
 
     return _middleware.bind(this)
 
-    function _middleware (req, res, next) {
+    function _middleware(req, res, next) {
       var self = this
       var options = self._options
 
@@ -56,10 +57,11 @@ Guard.prototype = {
           message: 'Permissions should be an Array or String. Bad format?'
         }))
       }
-      if (permissions.indexOf(superPermission) !== -1) {
-        return next(false)
+      for (var i = 0; i < superPermission.length; i++) {
+        if (permissions.indexOf(superPermission[i]) !== -1) {
+          return next(false)
+        }
       }
-
       var sufficient = required.every(function (permission) {
         return permissions.indexOf(permission) !== -1
       })
