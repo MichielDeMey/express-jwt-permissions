@@ -57,9 +57,11 @@ Guard.prototype = {
           message: 'Permissions should be an Array or String. Bad format?'
         }))
       }
-      for (var i = 0; i < superPermission.length; i++) {
-        if (permissions.indexOf(superPermission[i]) !== -1) {
-          return next(false)
+      if (superPermission) {
+        for (var i = 0; i < superPermission.length; i++) {
+          if (permissions.indexOf(superPermission[i]) !== -1) {
+            return next(false)
+          }
         }
       }
       var sufficient = required.every(function (permission) {
