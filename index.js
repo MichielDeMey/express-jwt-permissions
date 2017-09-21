@@ -59,8 +59,9 @@ Guard.prototype = {
       }
       if (superPermission) {
         for (var i = 0; i < superPermission.length; i++) {
+          console.log('Checking permission', superPermission[i], permissions.indexOf(superPermission[i]) !== -1);
           if (permissions.indexOf(superPermission[i]) !== -1) {
-            return next(false)
+            return next(false);
           }
         }
       }
