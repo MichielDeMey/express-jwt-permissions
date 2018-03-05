@@ -87,7 +87,7 @@ app.use(guard.check('admin'))
 
 app.use(function (err, req, res, next) {
   if (err.code === 'permission_denied') {
-    res.status(401).send('insufficient permissions');
+    res.status(403).send('Forbidden');
   }
 });
 ```
