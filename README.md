@@ -54,6 +54,42 @@ app.get('/status', guard.check('status'), function(req, res) { ... })
 app.get('/user', guard.check(['user:read']), function(req, res) { ... })
 ```
 
+### Matching segmented permissions
+Every entry in a required array must be matched on protected paths.  However,
+each entry can be configured to match multiple segmented permissions.
+
+In order for segmented permissions to match, the number of segments in each must
+be the same and for each segment there must be at least 1 match among the comma
+separated values.
+
+```javascript
+var guard = require('express-jwt-permissions')()
+// req = {
+//   user: {
+//     permissions: [
+//       'requests:edit:moderator'
+//     ]
+//   }
+// }
+
+// Match any of requests:edit:owner requests:edit:admin requests:edit:moderator
+app.put('/requests/{rid}/thing', guard.check('requests:edit:owner,admin,moderator'), function(req, res) { ... })
+```
+
+The reverse is also true.
+
+```javascript
+// req = {
+//   user: {
+//     permissions: [
+//       'requests:edit:moderator,admin'
+//     ]
+//   }
+// }
+
+app.put('/requests/{rid}/thing', guard.check('requests:edit:admin'), function(req, res) { ... })
+```
+
 ### Configuration
 To set where the module can find the user property (default `req.user`) you can set the `requestProperty` option.
 
