@@ -16,10 +16,22 @@ var Guard = function (options) {
   this._options = xtend(defaults, options)
 }
 
+function isString (value) {
+  return typeof value === 'string'
+}
+
+function isArray (value) {
+  return value instanceof Array
+}
+
 Guard.prototype = {
 
   check: function (required) {
-    if (typeof required === 'string') required = [required]
+    if (isString(required)) {
+      required = [[required]]
+    } else if (isArray(required) && required.every(isString)) {
+      required = [required]
+    }
 
     return _middleware.bind(this)
 
@@ -57,8 +69,10 @@ Guard.prototype = {
         }))
       }
 
-      var sufficient = required.every(function (permission) {
-        return permissions.indexOf(permission) !== -1
+      var sufficient = required.some(function (required) {
+        return required.every(function (permission) {
+          return permissions.indexOf(permission) !== -1
+        })
       })
 
       return next(!sufficient ? PermissionError : null)

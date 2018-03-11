@@ -54,6 +54,39 @@ app.get('/status', guard.check('status'), function(req, res) { ... })
 app.get('/user', guard.check(['user:read']), function(req, res) { ... })
 ```
 
+Logical combinations of required permissions can be made using nested arrays.
+
+Single string
+```js
+// Required: "admin"
+app.use(guard.check(
+  'admin'
+))
+```
+
+Array of strings
+```js
+// Required: "read" AND "write"
+app.use(guard.check(
+  ['read', 'write']
+))
+```
+
+Array of arrays of strings
+```js
+// Required: "read" OR "write"
+app.use(guard.check([
+  ['read'],
+  ['write']
+]))
+
+// Required: "admin" OR ("read" AND "write")
+app.use(guard.check([
+  ['admin'],
+  ['read', 'write']
+]))
+```
+
 ### Configuration
 To set where the module can find the user property (default `req.user`) you can set the `requestProperty` option.
 

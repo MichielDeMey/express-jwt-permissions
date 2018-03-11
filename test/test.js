@@ -146,3 +146,37 @@ test('OAuth space-delimited scopes', function (t) {
   var req = { user: { permissions: 'ping foo bar' } }
   guard.check('foo')(req, res, t.error)
 })
+
+test('valid boolean "OR" with single required permissions', function (t) {
+  t.plan(1)
+  var req = { user: { permissions: 'ping foo bar' } }
+  guard.check([['nope'], ['ping']])(req, res, t.error)
+})
+
+test('valid boolean "OR" with single and multiple required permissions', function (t) {
+  t.plan(1)
+  var req = { user: { permissions: 'ping foo bar' } }
+  guard.check([['nope'], ['ping', 'foo']])(req, res, t.error)
+})
+
+test('invalid boolean "OR" with single required permissions', function (t) {
+  t.plan(1)
+  var req = { user: { permissions: 'ping foo bar' } }
+  guard.check([['nope'], ['nada']])(req, res, function (err) {
+    if (!err) return t.end('should throw an error')
+
+    t.ok(err.code === 'permission_denied', 'correct error code')
+    t.end()
+  })
+})
+
+test('invalid boolean "OR" with multiple partial required permissions', function (t) {
+  t.plan(1)
+  var req = { user: { permissions: 'ping foo bar' } }
+  guard.check([['nope', 'foo'], ['nada', 'bar']])(req, res, function (err) {
+    if (!err) return t.end('should throw an error')
+
+    t.ok(err.code === 'permission_denied', 'correct error code')
+    t.end()
+  })
+})
