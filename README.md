@@ -65,7 +65,8 @@ app.use(guard.check(
 ```
 
 Array of strings
-```js
+
+```javascript
 // Required: "read" AND "write"
 app.use(guard.check(
   ['read', 'write']
@@ -73,7 +74,8 @@ app.use(guard.check(
 ```
 
 Array of arrays of strings
-```js
+
+```javascript
 // Required: "read" OR "write"
 app.use(guard.check([
   ['read'],
@@ -129,8 +131,10 @@ app.use(function (err, req, res, next) {
 
 ## Tests
 
-    $ npm install
-    $ npm test
+```
+$ npm install
+$ npm test
+```
 
 ## License
 
