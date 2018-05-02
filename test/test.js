@@ -180,3 +180,22 @@ test('invalid boolean "OR" with multiple partial required permissions', function
     t.end()
   })
 })
+
+test('express unless integration', function (t) {
+  t.plan(2)
+
+  var skipReq = { user: { permissions: [] }, url: '/not-secret' }
+  guard
+    .check(['foo'])
+    .unless({ path: '/not-secret' })(skipReq, res, t.error)
+
+  var doNotSkipReq = { user: { permissions: [] }, url: '/secret' }
+  guard
+    .check(['foo'])
+    .unless({ path: '/not-secret' })(doNotSkipReq, res, function (err) {
+      if (!err) return t.end('should throw an error')
+
+      t.ok(err.code === 'permission_denied', 'correct error code')
+      t.end()
+    })
+})

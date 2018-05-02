@@ -33,9 +33,7 @@ Guard.prototype = {
       required = [required]
     }
 
-    return _middleware.bind(this)
-
-    function _middleware (req, res, next) {
+    const _middleware = function _middleware (req, res, next) {
       var self = this
       var options = self._options
 
@@ -75,10 +73,13 @@ Guard.prototype = {
         })
       })
 
-      return next(!sufficient ? PermissionError : null)
-    }
-  }
+      next(!sufficient ? PermissionError : null)
+    }.bind(this)
 
+    _middleware.unless = require('express-unless')
+
+    return _middleware
+  }
 }
 
 module.exports = function (options) {
