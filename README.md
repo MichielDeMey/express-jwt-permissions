@@ -129,6 +129,18 @@ app.use(function (err, req, res, next) {
 
 **Note** that your error handling middleware should be defined after the jwt-permissions middleware.
 
+## Excluding paths
+
+This library has integration with [express-unless](https://github.com/jfromaniello/express-unless) to allow excluding paths, please refer to their [usage](https://github.com/jfromaniello/express-unless#usage).
+
+```javascript
+const checkForPermissions = guard
+  .check(['admin'])
+  .unless({ path: '/not-secret' })
+
+app.use(checkForPermissions)
+```
+
 ## Tests
 
 ```
