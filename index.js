@@ -43,7 +43,7 @@ Guard.prototype = {
         }))
       }
 
-      var user = req[options.requestProperty]
+      var user = get(req, options.requestProperty, undefined)
       if (!user) {
         return next(new UnauthorizedError('user_object_not_found', {
           message: util.format('user object "%s" was not found. Check your configuration.', options.requestProperty)
