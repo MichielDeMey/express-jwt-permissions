@@ -87,6 +87,26 @@ test('valid permissions with custom options', function (t) {
   guard.check('ping')(req, res, t.error)
 })
 
+test('valid requestProperty of level 1', function (t) {
+  t.plan(1)
+  var guard = require('../index')({
+    requestProperty: 'identity',
+    permissionsProperty: 'scopes'
+  })
+  var req = { identity: { scopes: ['ping'] } }
+  guard.check('ping')(req, res, t.error)
+})
+
+test('valid requestProperty of level n', function (t) {
+  t.plan(1)
+  var guard = require('../index')({
+    requestProperty: 'token.identity',
+    permissionsProperty: 'scopes'
+  })
+  var req = { token: {identity: { scopes: ['ping'] } } }
+  guard.check('ping')(req, res, t.error)
+})
+
 test('invalid permissions [Array] notation', function (t) {
   var req = { user: { permissions: ['ping'] } }
   guard.check('foo')(req, res, function (err) {
