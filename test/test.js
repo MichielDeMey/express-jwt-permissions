@@ -103,7 +103,7 @@ test('valid requestProperty of level n', function (t) {
     requestProperty: 'token.identity',
     permissionsProperty: 'scopes'
   })
-  var req = { token: {identity: { scopes: ['ping'] } } }
+  var req = { token: { identity: { scopes: ['ping'] } } }
   guard.check('ping')(req, res, t.error)
 })
 
