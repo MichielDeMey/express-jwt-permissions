@@ -1,5 +1,4 @@
 var util = require('util')
-var xtend = require('xtend')
 var get = require('lodash.get')
 
 var UnauthorizedError = require('./error')
@@ -13,7 +12,7 @@ var Guard = function (options) {
     permissionsProperty: 'permissions'
   }
 
-  this._options = xtend(defaults, options)
+  this._options = Object.assign(defaults, options)
 }
 
 function isString (value) {
