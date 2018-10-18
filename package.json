@@ -1,6 +1,6 @@
 {
   "name": "express-jwt-permissions",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Express middleware for JWT permissions",
   "main": "./index.js",
   "scripts": {
