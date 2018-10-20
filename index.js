@@ -12,7 +12,7 @@ var Guard = function (options) {
     permissionsProperty: 'permissions'
   }
 
-  this._options = Object.assign(defaults, options)
+  this._options = Object.assign({}, defaults, options)
 }
 
 function isString (value) {
