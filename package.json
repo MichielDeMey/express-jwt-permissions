@@ -2,10 +2,11 @@
   "name": "express-jwt-permissions",
   "version": "1.2.3",
   "description": "Express middleware for JWT permissions",
-  "main": "./index.js",
+  "main": "./Guard.js",
   "scripts": {
     "lint": "standard",
-    "test": "npm run lint && tap test/*.js --100"
+    "test": "npm run lint && tap test/*.js --100",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -30,8 +31,10 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "@types/node": "^10.12.12",
     "standard": "^7.1.2",
-    "tap": "^8.0.0"
+    "tap": "^8.0.0",
+    "typescript": "^3.2.2"
   },
   "dependencies": {
     "express-unless": "^0.5.0",
