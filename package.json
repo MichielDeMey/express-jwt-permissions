@@ -3,6 +3,7 @@
   "version": "1.2.3",
   "description": "Express middleware for JWT permissions",
   "main": "./index.js",
+  "typings": "index.d.ts",
   "scripts": {
     "lint": "standard",
     "test": "npm run lint && tap test/*.js --100"
@@ -31,7 +32,8 @@
   "license": "MIT",
   "devDependencies": {
     "standard": "^7.1.2",
-    "tap": "^8.0.0"
+    "tap": "^8.0.0",
+    "@types/express": "^4.16.1"
   },
   "dependencies": {
     "express-unless": "^0.5.0",
