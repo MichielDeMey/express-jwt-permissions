@@ -1,8 +1,8 @@
 import {Handler} from 'express';
 
 declare interface GuardOptions {
-    requestProperty: string;
-    permissionsProperty: string;
+    requestProperty?: string;
+    permissionsProperty?: string;
 }
 
 declare class Guard {
