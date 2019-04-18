@@ -1,14 +1,14 @@
-import {Handler} from 'express';
+import { Handler } from 'express'
 
 declare interface GuardOptions {
-    requestProperty?: string;
-    permissionsProperty?: string;
+  requestProperty?: string
+  permissionsProperty?: string
 }
 
 declare class Guard {
-    constructor(options: GuardOptions);
+  public constructor(options: GuardOptions);
 
-    check(required: string | Array<string>): Handler;
+  public check(required: string | string[]): Handler;
 }
 
 declare function guardFactory(options: GuardOptions): Guard;

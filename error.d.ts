@@ -1,9 +1,9 @@
 declare class UnauthorizedError extends Error {
-    code: string;
-    status: number;
-    inner: Error;
+  public code: string;
+  public status: number;
+  public inner: Error;
 
-    constructor(code: string, error: Error);
+  public constructor(code: string, error: Error);
 }
 
 export = UnauthorizedError;
