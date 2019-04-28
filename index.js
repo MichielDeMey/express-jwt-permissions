@@ -9,7 +9,8 @@ var PermissionError = new UnauthorizedError(
 var Guard = function (options) {
   var defaults = {
     requestProperty: 'user',
-    permissionsProperty: 'permissions'
+    permissionsProperty: 'permissions',
+    permissionsDelimiter: ' '
   }
 
   this._options = Object.assign({}, defaults, options)
@@ -57,7 +58,7 @@ Guard.prototype = {
       }
 
       if (typeof permissions === 'string') {
-        permissions = permissions.split(' ')
+        permissions = permissions.split(options.permissionsDelimiter)
       }
 
       if (!Array.isArray(permissions)) {
