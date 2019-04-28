@@ -20,7 +20,7 @@ This middleware assumes you already have a JWT authentication middleware such as
 
 The middleware will check a decoded JWT token to see if a token has permissions to make a certain request.
 
-Permissions should be described as an array of strings inside the JWT token, or as a space-delimited [OAuth 2.0 Access Token Scope](https://tools.ietf.org/html/rfc6749#section-3.3) string.
+Permissions should be described as an array of strings inside the JWT token, or as a [OAuth 2.0 Access Token Scope](https://tools.ietf.org/html/rfc6749#section-3.3) string (space-delimited by default).
 
 ```json
 "permissions": [
@@ -94,12 +94,14 @@ To set where the module can find the user property (default `req.user`) you can 
 
 To set where the module can find the permissions property inside the `requestProperty` object (default `permissions`), set the `permissionsProperty` option.
 
+To set how module should split the permissions property inside the `requestProperty` object (default ` `), set the `permissionsDelimiter` option.
+
 Example:
 
 Consider you've set your permissions as `scope` on `req.identity`, your JWT structure looks like:
 
 ```json
-"scope": "user:read user:write"
+"scope": "user:read,user:write"
 ```
 
 You can pass the configuration into the module:
@@ -107,7 +109,8 @@ You can pass the configuration into the module:
 ```javascript
 var guard = require('express-jwt-permissions')({
   requestProperty: 'identity',
-  permissionsProperty: 'scope'
+  permissionsProperty: 'scope',
+  permissionsDelimiter: ','
 })
 
 app.use(guard.check('user:read'))
