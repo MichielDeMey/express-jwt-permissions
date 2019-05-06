@@ -8,7 +8,7 @@ declare interface GuardOptions {
 declare class Guard {
   public constructor(options: GuardOptions);
 
-  public check(required: string | string[]): Handler;
+  public check(required: string | string[] | string[][]): Handler;
 }
 
 declare function guardFactory(options: GuardOptions): Guard;
