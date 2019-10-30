@@ -13,4 +13,7 @@ declare class Guard {
 
 declare function guardFactory(options: GuardOptions): Guard;
 
+declare namespace guardFactory {
+}
+
 export = guardFactory;
