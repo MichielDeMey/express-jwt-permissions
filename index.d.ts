@@ -6,12 +6,12 @@ declare interface GuardOptions {
 }
 
 declare class Guard {
-  public constructor(options: GuardOptions);
+  public constructor(options?: GuardOptions);
 
   public check(required: string | string[] | string[][]): Handler;
 }
 
-declare function guardFactory(options: GuardOptions): Guard;
+declare function guardFactory(options?: GuardOptions): Guard;
 
 declare namespace guardFactory {
 }
