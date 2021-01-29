@@ -33,7 +33,7 @@
   "devDependencies": {
     "@types/express": "^4.16.1",
     "standard": "^7.1.2",
-    "tap": "^8.0.0"
+    "tap": "^14.11.0"
   },
   "dependencies": {
     "express-unless": "^0.5.0",
