@@ -1,4 +1,4 @@
-var util = require('util')
+const util = require('util')
 
 module.exports = function UnauthorizedError (code, error) {
   Error.captureStackTrace(this, this.constructor)

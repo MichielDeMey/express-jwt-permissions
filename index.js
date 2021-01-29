@@ -1,13 +1,13 @@
-var util = require('util')
-var get = require('lodash.get')
+const util = require('util')
+const get = require('lodash.get')
 
-var UnauthorizedError = require('./error')
-var PermissionError = new UnauthorizedError(
+const UnauthorizedError = require('./error')
+const PermissionError = new UnauthorizedError(
   'permission_denied', { message: 'Permission denied' }
 )
 
-var Guard = function (options) {
-  var defaults = {
+const Guard = function (options) {
+  const defaults = {
     requestProperty: 'user',
     permissionsProperty: 'permissions'
   }
@@ -33,8 +33,8 @@ Guard.prototype = {
     }
 
     const _middleware = function _middleware (req, res, next) {
-      var self = this
-      var options = self._options
+      const self = this
+      const options = self._options
 
       if (!options.requestProperty) {
         return next(new UnauthorizedError('request_property_undefined', {
@@ -42,14 +42,14 @@ Guard.prototype = {
         }))
       }
 
-      var user = get(req, options.requestProperty, undefined)
+      const user = get(req, options.requestProperty, undefined)
       if (!user) {
         return next(new UnauthorizedError('user_object_not_found', {
           message: util.format('user object "%s" was not found. Check your configuration.', options.requestProperty)
         }))
       }
 
-      var permissions = get(user, options.permissionsProperty, undefined)
+      let permissions = get(user, options.permissionsProperty, undefined)
       if (!permissions) {
         return next(new UnauthorizedError('permissions_not_found', {
           message: 'Could not find permissions for user. Bad configuration?'
@@ -66,7 +66,7 @@ Guard.prototype = {
         }))
       }
 
-      var sufficient = required.some(function (required) {
+      const sufficient = required.some(function (required) {
         return required.every(function (permission) {
           return permissions.indexOf(permission) !== -1
         })
