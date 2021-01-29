@@ -6,7 +6,7 @@
   "typings": "index.d.ts",
   "scripts": {
     "lint": "standard",
-    "test": "npm run lint && tap test/*.js --100 --coverage-report=onlylcov"
+    "test": "npm run lint && tap test/*.js --100 --coverage-report=lcovonly"
   },
   "repository": {
     "type": "git",
