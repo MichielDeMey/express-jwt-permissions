@@ -28,3 +28,7 @@ jobs:
     - run: npm install # npm ci is not available on all NPM versions
     - run: npm run build --if-present
     - run: npm test
+    - name: Upload Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
