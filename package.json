@@ -32,7 +32,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/express": "^4.16.1",
-    "standard": "^7.1.2",
+    "standard": "^16.0.3",
     "tap": "^8.0.0"
   },
   "dependencies": {
