@@ -1,6 +1,6 @@
 # Express JWT Permissions
 
-![Node.js CI](https://github.com/MichielDeMey/express-jwt-permissions/workflows/Node.js%20CI/badge.svg)
+[![Node.js CI](https://github.com/MichielDeMey/express-jwt-permissions/workflows/Node.js%20CI/badge.svg)](https://github.com/MichielDeMey/express-jwt-permissions/actions?query=workflow%3A%22Node.js+CI%22)
 [![codecov](https://codecov.io/gh/MichielDeMey/express-jwt-permissions/branch/master/graph/badge.svg?token=UXWXehGp1x)](https://codecov.io/gh/MichielDeMey/express-jwt-permissions)
 [![npm](https://img.shields.io/npm/dm/express-jwt-permissions.svg?maxAge=2592000)](https://www.npmjs.com/package/express-jwt-permissions)
 
