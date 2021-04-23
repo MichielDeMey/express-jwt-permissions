@@ -1,7 +1,11 @@
 const util = require('util')
 
 module.exports = function UnauthorizedError (code, error) {
-  Error.captureStackTrace(this, this.constructor)
+  if (!Error.captureStackTrace){
+    this.stack = (new Error()).stack;
+  }else {
+    Error.captureStackTrace(this, this.constructor);
+  }
 
   this.name = this.constructor.name
   this.message = error.message
