@@ -1,4 +1,4 @@
-import { Handler } from 'express'
+import { RequestHandler } from "express-unless";
 
 declare interface GuardOptions {
   requestProperty?: string
@@ -8,7 +8,7 @@ declare interface GuardOptions {
 declare class Guard {
   public constructor(options?: GuardOptions);
 
-  public check(required: string | string[] | string[][]): Handler;
+  public check(required: string | string[] | string[][]): RequestHandler;
 }
 
 declare function guardFactory(options?: GuardOptions): Guard;
