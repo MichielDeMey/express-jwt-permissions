@@ -34,7 +34,7 @@
     "@types/express": "^4.16.1",
     "@types/express-unless": "^0.5.2",
     "standard": "^16.0.0",
-    "tap": "^14.0.0"
+    "tap": "^16.2.0"
   },
   "dependencies": {
     "express-unless": "^1.0.0",
