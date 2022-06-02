@@ -37,7 +37,7 @@
     "tap": "^14.0.0"
   },
   "dependencies": {
-    "express-unless": "^1.0.0",
+    "express-unless": "^2.1.0",
     "lodash.get": "^4.4.2"
   },
   "engines": {
