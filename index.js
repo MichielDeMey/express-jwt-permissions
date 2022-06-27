@@ -75,7 +75,7 @@ Guard.prototype = {
       next(!sufficient ? PermissionError : null)
     }.bind(this)
 
-    _middleware.unless = require('express-unless')
+    _middleware.unless = require('express-unless').unless
 
     return _middleware
   }
