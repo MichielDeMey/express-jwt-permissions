@@ -4,6 +4,7 @@
 [![CodeQL](https://github.com/MichielDeMey/express-jwt-permissions/actions/workflows/codeql-analysis.yml/badge.svg?branch=master)](https://github.com/MichielDeMey/express-jwt-permissions/actions/workflows/codeql-analysis.yml)
 [![codecov](https://codecov.io/gh/MichielDeMey/express-jwt-permissions/branch/master/graph/badge.svg?token=UXWXehGp1x)](https://codecov.io/gh/MichielDeMey/express-jwt-permissions)
 [![npm](https://img.shields.io/npm/dm/express-jwt-permissions.svg?maxAge=2592000)](https://www.npmjs.com/package/express-jwt-permissions)
+[![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/MichielDeMey)
 
 [![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
