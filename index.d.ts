@@ -1,4 +1,4 @@
-import { RequestHandler } from "express-unless";
+import { RequestHandler } from "express";
 
 declare interface GuardOptions {
   requestProperty?: string
